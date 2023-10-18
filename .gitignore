@@ -1,0 +1,7 @@
+#Ignore main.c files
+
+*main.c
+bubble
+insertion
+select
+quick
