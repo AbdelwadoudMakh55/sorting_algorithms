@@ -29,9 +29,9 @@ void quick_sort(int *array, size_t size)
 	unsigned int low = 0, high = size - 2, i = 0, copy_size = size;
 	int pivot, tmp;
 
-	pivot = array[copy_size - 1];
 	while (i < copy_size)
 	{
+		pivot = array[copy_size - 1];
 		if (pivot == check_max(array, copy_size))
 		{
 			copy_size--;
