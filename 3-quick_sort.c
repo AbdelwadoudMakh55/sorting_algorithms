@@ -29,12 +29,14 @@ void quick_sort(int *array, size_t size)
 	unsigned int low = 0, high = size - 2, i = 0, copy_size = size;
 	int pivot, tmp;
 
-	while (i < copy_size)
+	while (i < size)
 	{
 		pivot = array[copy_size - 1];
-		if (pivot == check_max(array, copy_size))
+		while (pivot == check_max(array, copy_size))
 		{
 			copy_size--;
+			if (copy_size <=  2)
+				return;
 			pivot = array[copy_size - 1];
 		}
 		high = copy_size - 2;
@@ -59,7 +61,6 @@ void quick_sort(int *array, size_t size)
 		{
 			tmp = array[low];
 			array[low] = pivot;
-			pivot = tmp;
 			array[copy_size - 1] = tmp;
 			print_array(array, size);
 		}
