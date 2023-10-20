@@ -61,6 +61,7 @@ void quick_sort(int *array, size_t size)
 		{
 			tmp = array[low];
 			array[low] = pivot;
+			pivot = tmp;
 			array[copy_size - 1] = tmp;
 			print_array(array, size);
 		}
