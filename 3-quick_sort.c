@@ -20,13 +20,15 @@ int partition(int l, int h, int *array, int *copy_array, int copy_size)
 			tmp = array[i];
 			array[i] = array[j];
 			array[j] = tmp;
-			print_array(copy_array, copy_size);
+			if (i != j)
+				print_array(copy_array, copy_size);
 		}
 	}
 	tmp = array[i + 1];
 	array[i + 1] = array[h];
 	array[h] = tmp;
-	print_array(copy_array, copy_size);
+	if (i + 1 != h)
+		print_array(copy_array, copy_size);
 	return (i + 1);
 }
 /**
