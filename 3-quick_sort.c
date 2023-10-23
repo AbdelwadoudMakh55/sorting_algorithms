@@ -1,69 +1,46 @@
 #include "sort.h"
 /**
- * check_max - Find the max of a list.
- * @array : Array of integers.
- * @size : Size of the array.
- * Return: max (int).
- */
-int check_max(int *array, size_t size)
-{
-	unsigned int i = 0;
-	int max = array[0];
-
-	while (i < size)
-	{
-		if (array[i] > max)
-			max = array[i];
-		i++;
-	}
-	return (max);
-}
-/**
- * quick_sort - Function of the algorithm of quick sort.
+ * partition - Function of the partition.
+ * @l : Lowest point of array.
+ * @h : Highest point of array.
  * @array : Pointer to array of integers.
  * @size : Size of the array.
- * Return: Void.
+ * Return: Position of pivot.
  */
+int partition(int l, int h, int *array, size_t size)
+{
+	int pivot = array[h], i = l - 1, tmp, j;
+
+	for (j = l; j <= h - 1; j++)
+	{
+		if (array[j] <= pivot)
+		{
+			i++;
+			tmp = array[i];
+			array[i] = array[j];
+			array[j] = tmp;
+		}
+	}
+	tmp = array[i + 1];
+	array[i + 1] = array[h];
+	array[h] = tmp;
+	return (i + 1);
+}
+/**
+* quick_sort - Function of the algorithm of quick sort.
+* @array : Pointer to array of integers.
+* @size : Size of the array.
+* Return: Void.
+*/
 void quick_sort(int *array, size_t size)
 {
-	unsigned int low = 0, high = size - 2, i = 0, copy_size = size;
-	int pivot, tmp;
+	int pivot;
 
-	while (i < size)
+	if (size > 1)
 	{
-		pivot = array[copy_size - 1];
-		while (pivot == check_max(array, copy_size))
-		{
-			copy_size--;
-			if (copy_size <=  2)
-				return;
-			pivot = array[copy_size - 1];
-		}
-		high = copy_size - 2;
-		low = 0;
-		while (high > low)
-		{
-			while (array[low] < pivot && high > low)
-				low++;
-			while (array[high] > pivot && high > low)
-				high--;
-			if (array[low] > pivot && array[high] < pivot && high > low)
-			{
-				tmp = array[low];
-				array[low] = array[high];
-				array[high] = tmp;
-				print_array(array, size);
-				high--;
-				low++;
-			}
-		}
-		if (pivot < array[low])
-		{
-			tmp = array[low];
-			array[low] = pivot;
-			array[copy_size - 1] = tmp;
-			print_array(array, size);
-		}
-		i++;
+		pivot = partition(0, size - 1, array, size);
+		print_array(array, size);
+		quick_sort(array, pivot);
+		quick_sort(array + pivot + 1, size - pivot - 1);
 	}
 }
