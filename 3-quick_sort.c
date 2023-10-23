@@ -19,11 +19,13 @@ int partition(int l, int h, int *array, size_t size)
 			tmp = array[i];
 			array[i] = array[j];
 			array[j] = tmp;
+			print_array(array, size);
 		}
 	}
 	tmp = array[i + 1];
 	array[i + 1] = array[h];
 	array[h] = tmp;
+	print_array(array, size);
 	return (i + 1);
 }
 /**
