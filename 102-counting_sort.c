@@ -44,7 +44,8 @@ void counting_sort(int *array, size_t size)
 	for (j = SIZE - 1; j >= 0; j--)
 	{
 		index = copy_array[j];
-		index1 = count_array[index] - 1;
+		count_array[index] -= 1;
+		index1 = count_array[index];
 		array[index1] = copy_array[j];
 	}
 	free(count_array);
