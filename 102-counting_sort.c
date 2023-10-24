@@ -26,11 +26,14 @@ int max_array(int *array, size_t size)
  */
 void counting_sort(int *array, size_t size)
 {
-	int *count_array, key, j, SIZE = size, tmp;
+	int *count_array, *copy_array, key, j, SIZE = size, index, index1;
 	size_t i;
 
 	key = max_array(array, size) + 1;
 	count_array = malloc(sizeof(int) * key);
+	copy_array = malloc(sizeof(int) * size);
+	for (i = 0; i < size; i++)
+		copy_array[i] = array[i];
 	for (i = 0; i < size; i++)
 		count_array[array[i]]++;
 	for (j = 1; j < key; j++)
@@ -40,8 +43,10 @@ void counting_sort(int *array, size_t size)
 	print_array(count_array, key);
 	for (j = SIZE - 1; j >= 0; j--)
 	{
-		tmp = array[count_array[array[j]] - 1];
-		array[count_array[array[j]] - 1] = array[j];
-		array[j] = tmp;
+		index = copy_array[j];
+		index1 = count_array[index] - 1;
+		array[index1] = copy_array[j];
 	}
+	free(count_array);
+	free(copy_array);
 }
