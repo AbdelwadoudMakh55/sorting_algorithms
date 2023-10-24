@@ -88,16 +88,15 @@ size_t listint_len(const listint_t *h)
  */
 void cocktail_sort_list(listint_t **list)
 {
-	listint_t *init, *tmp;
+	listint_t *tmp;
 	size_t size, i = 0;
 
 	if (list == NULL || *list == NULL)
 		return;
-	init = *list;
 	size = listint_len(*list);
 	while (i < size)
 	{
-		tmp = init;
+		tmp = *list;
 		forward_pass(list, tmp);
 		backward_pass(list, tmp);
 		i++;
