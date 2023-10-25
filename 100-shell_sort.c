@@ -22,7 +22,7 @@ int knuth_gap(size_t size)
  */
 void shell_sort(int *array, size_t size)
 {
-	int gap = knuth_gap(size), tmp, i, SIZE = size;
+	int gap = knuth_gap(size), tmp, i, k, SIZE = size, backward;
 
 	while (gap >= 1)
 	{
@@ -33,12 +33,16 @@ void shell_sort(int *array, size_t size)
 				tmp = array[i];
 				array[i] = array[gap + i];
 				array[gap + i] = tmp;
-				while (gap <= i && array[i - gap] > array[i])
+				backward = i - gap;
+				k = i;
+				while (backward >= 0 && array[backward] > array[k])
 				{
-					tmp = array[i];
-					array[i] = array[i - gap];
-					array[i - gap] = tmp;
-					i--;
+
+					tmp = array[k];
+					array[k] = array[backward];
+					array[backward] = tmp;
+					k = backward;
+					backward -= gap;
 				}
 			}
 		}
