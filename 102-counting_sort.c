@@ -29,6 +29,8 @@ void counting_sort(int *array, size_t size)
 	int *count_array, *copy_array, key, j, SIZE = size, index, index1;
 	size_t i;
 
+	if (size == 1)
+		return;
 	key = max_array(array, size) + 1;
 	count_array = malloc(sizeof(int) * key);
 	copy_array = malloc(sizeof(int) * size);
