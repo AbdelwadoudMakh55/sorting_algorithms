@@ -45,7 +45,7 @@ void radix_sort(int *array, size_t size)
 	int max, len_max, **bucket, pass = 0, ten_pow = 1, index_bucket;
 	size_t i, j, k;
 
-	if (array == NULL)
+	if (array == NULL || size == 1)
 		return;
 	max = max_array(array, size);
 	len_max = len_digit(max);
