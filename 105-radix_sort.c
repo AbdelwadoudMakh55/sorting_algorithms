@@ -50,8 +50,6 @@ void radix_sort(int *array, size_t size)
 	max = max_array(array, size);
 	len_max = len_digit(max);
 	bucket = malloc(sizeof(int *) * size);
-	if (bucket == NULL)
-		return;
 	for (i = 0; i < size; i++)
 		bucket[i] = malloc(sizeof(int) * size);
 	while (pass < len_max)
@@ -85,29 +83,3 @@ void radix_sort(int *array, size_t size)
 		ten_pow = ten_pow * 10;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
