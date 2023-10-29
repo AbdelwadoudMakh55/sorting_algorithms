@@ -82,4 +82,7 @@ void radix_sort(int *array, size_t size)
 		ten_pow = ten_pow * 10;
 		print_array(array, size);
 	}
+	for (i = 0; i < 10; i++)
+		free(bucket[i]);
+	free(bucket);
 }
