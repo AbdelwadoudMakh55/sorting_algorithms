@@ -35,6 +35,28 @@ int len_digit(int n)
 	return (len + 1);
 }
 /**
+ * fill_bucket - Fill the bucket with the numbers.
+ * @size : Size of the array.
+ * @array : The array of integers.
+ * @bucket : Bucket of radix sort.
+ * @ten_pow : Power of ten.
+ * Return: Void.
+ */
+void fill_bucket(int *array, int **bucket, size_t size, int ten_pow)
+{
+	int index_bucket;
+	size_t k, i;
+
+	for (i = 0; i < size; i++)
+	{
+		k = 0;
+		index_bucket = (array[i] / ten_pow) % 10;
+		while (bucket[index_bucket][k] != -1)
+			k++;
+		bucket[index_bucket][k] = array[i];
+	}
+}
+/**
  * radix_sort - The algorithm for the radix sort.
  * @array : Pointer to array.
  * @size : Length of array.
@@ -42,7 +64,7 @@ int len_digit(int n)
  */
 void radix_sort(int *array, size_t size)
 {
-	int max, len_max, **bucket, pass = 0, ten_pow = 1, index_bucket;
+	int max, len_max, **bucket, pass = 0, ten_pow = 1;
 	size_t i, j, k;
 
 	if (array == NULL || size == 1)
@@ -57,14 +79,7 @@ void radix_sort(int *array, size_t size)
 		for (i = 0; i < 10; i++)
 			for (j = 0; j < size; j++)
 				bucket[i][j] = -1;
-		for (i = 0; i < size; i++)
-		{
-			k = 0;
-			index_bucket = (array[i] / ten_pow) % 10;
-			while (bucket[index_bucket][k] != -1)
-				k++;
-			bucket[index_bucket][k] = array[i];
-		}
+		fill_bucket(array, bucket, size, ten_pow);
 		j = 0;
 		i = 0;
 		while (j < size && i < 10)
